@@ -1,8 +1,9 @@
 import telebot
+from telebot import types
 
 userStep = {}  # so they won't reset every time the bot restarts
 knownUsers = []
-with open(".\goazen.token", "r") as T:
+with open("goazen.token", "r") as T:
     bot = telebot.TeleBot(T.read().strip())
 
 
@@ -18,20 +19,22 @@ def get_user_step(uid):
 
 
 def listener(messages):
-
     for m in messages:
         if m.content_type == 'text':
             # print the sent message to the console
             print(str(m.chat.first_name) + " [" + str(m.chat.id) + "]: " + m.text)
+
 
 # Create bot
 bot = telebot.TeleBot(T)
 bot.set_update_listener(listener)
 
 
-
-
-
+@bot.message_handler(commands=['goazen'])
+def goazen(message):
+    cid = message.chat.id
+    with open("goazen.mp3", "rb") as f:
+        bot.send_audio(message.chat.id, f)
 
 
 # Ignore previous messages
