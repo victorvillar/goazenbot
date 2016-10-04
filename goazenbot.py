@@ -22,11 +22,11 @@ def start(message):
     bot.reply_to(message, "Funcionamiento: GOAZEN GOAZEN")
 
 
-@bot.message_handler(regexp='.?(goazen).?')
+@bot.message_handler(regexp='.?([gG][oO][aA][zZ][eE][nN]).?')
 def goazen(message):
     cid = message.chat.id
-    with open("C:/Users/Victor/PycharmProjects/goazenbot/goazen.mp3", "rb") as f:
-        bot.send_audio(cid, f)
+    with open("C:/Users/Victor/PycharmProjects/goazenbot/Goazen.ogg", "rb") as f:
+        bot.send_voice(cid, f)
     bot.reply_to(message, 'GOAZEN GOAZEN')
 
 # Ignore previous messages
